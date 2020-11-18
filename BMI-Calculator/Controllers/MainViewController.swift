@@ -17,7 +17,8 @@ class MainViewController: UIViewController {
     
     var weight: Int = 0
     var height: Double = 0.0
-    
+    var bmiValue: Float = 0.0
+    var advice: String = "Eat Some More Snacks"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,15 +36,23 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func calculateClicked(_ sender: UIButton) {
-        let bmi = weightSlider.value/pow(heightSlider.value, 2)
-        //print(bmi)
+        bmiValue = weightSlider.value/pow(heightSlider.value, 2)
         
-        let secondVC = SecondViewController()
-        secondVC.bmiValue = bmi
+        if bmiValue > 25 {
+            advice = "Eat Less Snacks"
+        }
         
-        self.present(secondVC, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "showResult", sender: self)
         
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showResult"{
+            let destinationVC = segue.destination as! ResultViewController
+            destinationVC.bmiValue = String(format: "%.2f", self.bmiValue)
+            destinationVC.advice = self.advice
+        }
     }
 }
 
