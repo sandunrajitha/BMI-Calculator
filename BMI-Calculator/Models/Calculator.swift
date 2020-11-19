@@ -9,35 +9,33 @@ import UIKit
 struct Calculator {
     let weight: Float
     let height: Float
-    var colour: UIColor
-    var advice: String?
-    var bmi: Float
-    var bmiLabel: String
-    
+//    var colour: UIColor
+//    var advice: String
+//    var bmi: Float
+//    var bmiLabel: String
+    var bmi: BMI?
     
     
     init(_ weight: Float, _ height: Float) {
         self.weight = weight
         self.height = height
+    }
+    
+    mutating func calculateBMI() -> BMI?{
+
+        let bmiValue = weight/pow(height, 2)
         
-        bmi = weight/pow(height, 2)
-        print(bmi)
-        
-        if bmi.rounded()>30{
-            advice = "Eat less & Exercise!"
-            colour = .red
-        }else if (bmi.rounded() >= 25) {
-            advice = "Eat less snaks"
-            colour = .blue
-        } else if bmi.rounded() < 18.5 {
-            advice = "Eat more snacks"
-            colour = .orange
+        if bmiValue.rounded()>30{
+            bmi = BMI(value: bmiValue, advice: "Eat less & Exercise!", colour: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
+        }else if (bmiValue.rounded() >= 25) {
+            bmi = BMI(value: bmiValue, advice: "Eat less snaks", colour: #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1))
+        } else if bmiValue.rounded() < 18.5 {
+            bmi = BMI(value: bmiValue, advice: "Eat more snacks", colour: #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1))
         } else {
-            advice = "You are doing fine"
-            colour = .green
+            bmi = BMI(value: bmiValue, advice: "You are doing fine", colour: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
         }
         
-        bmiLabel = String(format: "%.1f", bmi)
+        return bmi
     }
     
     

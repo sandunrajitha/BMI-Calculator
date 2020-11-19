@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     var height: Float = 1.50
     var weight: Float = 100
     var bmiCalculator: Calculator?
+    var bmi: BMI?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +37,14 @@ class MainViewController: UIViewController {
     
     @IBAction func calculateClicked(_ sender: UIButton) {
         bmiCalculator = Calculator(self.weight, self.height)
-        print(weight, height)
+        bmi = bmiCalculator?.calculateBMI()
         self.performSegue(withIdentifier: "showResult", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showResult"{
             let destinationVC = segue.destination as! ResultViewController
-            destinationVC.bmiCalculator = self.bmiCalculator
+            destinationVC.bmi = self.bmi
         }
     }
 }

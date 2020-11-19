@@ -12,14 +12,14 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
     
-    var bmiCalculator: Calculator?
+    var bmi: BMI?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        resultLabel.text = bmiCalculator?.bmiLabel
-        adviceLabel.text = bmiCalculator?.advice
-        view.backgroundColor = bmiCalculator?.colour
+        resultLabel.text = String(format: "%.2f", bmi?.value ?? 0.00)
+        adviceLabel.text = bmi?.advice ?? "Calculate BMI Again"
+        view.backgroundColor = bmi?.colour ?? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
