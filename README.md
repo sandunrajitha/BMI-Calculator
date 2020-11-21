@@ -11,5 +11,8 @@ Body Mass Index calculator. Based on the user’s weight and height it will calc
 * Formatting Strings. 
 * Color literals.
 
+![landscape](images/landscape.gif)
+
+![portrait](images/portrait.gif)
 
 >Created as a companion project to The App Brewery's Complete App Development Bootcamp.
